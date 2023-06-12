@@ -7,7 +7,7 @@ router
   .route("/api/teachers")
   .get(Controller.getActiveTeachers)
   .put(Controller.updateTeacher)
-  .post(Controller.registerTeacher);
+  .post(Controller.Createteacher);
 
 router.route("/api/teachers/:id?").get(Controller.getTeacherById);
 

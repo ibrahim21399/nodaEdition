@@ -130,15 +130,13 @@ module.exports.activateTeacher = (request, response, next) => {
 };
 
 //Create
-module.exports.registerTeacher = (request, response, next) => {
-  // checkValidation(request)
+module.exports.Createteacher = (request, response, next) => {
   console.log(request);
   Teacher.findOne({ email: request.body.email })
     .then((data) => {
       if (data) {
         throw new Error("this email is already taken");
       }
-      // encrypt the password
       bcrypt.hash(request.body.password, 10).then((hash) => {
         let newTeacher = new Teacher({
           email: request.body.email,
@@ -152,6 +150,7 @@ module.exports.registerTeacher = (request, response, next) => {
           Active: false,
           password: hash,
         });
+        console.log(newTeacher);
         newTeacher
           .save()
           .then((data) => {
