@@ -40,8 +40,8 @@ module.exports.getStudentById = (request, response, next) => {
 module.exports.enrollStudent = async (request, response, next) => {
   try {
     console.log("EnrollToTeacher");
-    const teacherId = request.body.teacherId;
-    const studentId = request.body.studentId;
+    const teacherId = request.body.TeacherId;
+    const studentId = request.body.StudentId;
     const teacher = await Teacher.findById(teacherId);
     if (!teacher) {
       throw new Error("Teacher not found");
