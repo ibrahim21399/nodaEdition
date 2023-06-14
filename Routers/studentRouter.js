@@ -20,6 +20,6 @@ router.route("/api/ActiveStudent/:id").post(Controller.activateAccount);
 
 router.route("/api/EnrollStudent").post(Controller.enrollStudent);
 
-router.route("/api/teachers/:teacherId/ratings").post(Controller.addRating);
+router.route("/api/teachers/rating/:teacherId").post(Controller.addRating);
 
 module.exports = router;

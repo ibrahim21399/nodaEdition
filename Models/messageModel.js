@@ -5,7 +5,8 @@ const messageSchema = new mongoose.Schema({
   student: { type: mongoose.Schema.Types.ObjectId, ref: 'students', required: true },
   message: { type: String, required: true },
   sentDate: { type: Date, default: Date.now },
-  isTeacher:{Type:Boolean}
+  isTeacher: { type: Boolean, required: true, default: false }
+
 });
 
 module.exports = mongoose.model('messages', messageSchema);

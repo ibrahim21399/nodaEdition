@@ -52,7 +52,7 @@ module.exports.getTeacherById = (request, response, next) => {
   Teacher.find({ _id: request.params.id })
     .populate({
       path: "studentEnrolled",
-      select: "name email -_id",
+      select: "name email ",
     })
     .then((data) => {
       if (data.length == 0) throw new error("No data");
@@ -108,8 +108,8 @@ module.exports.activateTeacher = (request, response, next) => {
           const mailOptions = {
             from: "teacherapp67@gmail.com",
             to: data.email,
-            subject: "Your account has been approved",
-            text: "Congratulations! Your account has been approved.",
+            subject: "Your account As Teacher in Online Teacher App Approved",
+            text: "Congratulations! Welcome to Our Comunity,  Your account has been approved.",
           };
 
           transporter.sendMail(mailOptions, function (error, info) {
@@ -140,7 +140,7 @@ module.exports.Createteacher = (request, response, next) => {
       bcrypt.hash(request.body.password, 10).then((hash) => {
         let newTeacher = new Teacher({
           email: request.body.email,
-          Phone: request.body.Phone,
+          phone: request.body.phone,
           field: request.body.field,
           experienceYears: request.body.experienceYears,
           Latitude: request.body.Latitude,
@@ -173,8 +173,10 @@ module.exports.getFeedbackForTeacher = async (req, res, next) => {
       { feedback: 1, rate: 1, studentId: 1, _id: 0 }
     ).populate({
       path: "studentId",
-      select: "name email -_id",
+      select: "name email _id",
     });
+
+    console.log(feedback);
 
     res.json(feedback);
   } catch (err) {

@@ -59,8 +59,6 @@ module.exports.enrollStudent = async (request, response, next) => {
 
 //create
 module.exports.createStudent = (request, response, next) => {
-  console.log("create");
-
   Student.find({ email: request.body.email })
     .then((Data) => {
       if (Data.length != 0) {
@@ -79,7 +77,6 @@ module.exports.createStudent = (request, response, next) => {
             });
             student.save().then((data) => {
               response.status(201).json({ message: "created", data });
-              console.log("created");
             });
           })
           .catch((error) => next(error));
@@ -90,8 +87,6 @@ module.exports.createStudent = (request, response, next) => {
 
 //Update
 module.exports.updateStudent = (request, response, next) => {
-  console.log("update");
-
   Student.updateOne(
     { _id: request.body._id },
     {
@@ -114,8 +109,6 @@ module.exports.updateStudent = (request, response, next) => {
 
 //Delete
 module.exports.deleteStudent = (request, response, next) => {
-  console.log("delete");
-
   Student.deleteOne({ _id: request.params.id })
     .then((data) => {
       response.status(200).json({ message: "Deleted", data });
@@ -185,11 +178,11 @@ module.exports.addRating = async (req, res) => {
     const { teacherId } = req.params;
     const { rate, feedback, studentId } = req.body;
 
+    console.log(req);
     const teacher = await Teacher.findById(teacherId);
     if (!teacher) {
       return res.status(404).json({ error: "Teacher not found" });
     }
-
     // Check if the student is enrolled in the teacher
     if (!teacher.studentEnrolled.includes(studentId)) {
       return res

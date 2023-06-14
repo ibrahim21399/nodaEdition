@@ -1,4 +1,5 @@
 
+const messageModel = require("./../Models/messageModel");
 const Model = require("./../Models/messageModel");
 const Student = require("./../Models/studentModel");
 const Teacher = require("./../Models/teacherModel");
@@ -21,12 +22,13 @@ module.exports.SendMessage = (request, response, next) => {
   console.log(request.body);
 
 
-    const newMessage = new Model({
-      student:request.body.student,
-      teacher:request.body.teacher,
-      message:request.body.message,
-      isTeacher:request.body.isTeacher
-    });
+  const newMessage = new Model({
+    student:request.body.student,
+    teacher:request.body.teacher,
+    message:request.body.message,
+    isTeacher:request.body.isTeacher
+  });
+    console.log(newMessage);
     newMessage.save().then((data) => {
         response.status(201).json({ message: "sent", data });
         console.log("sent");
